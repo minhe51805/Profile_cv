@@ -32,7 +32,7 @@ export default function Contact({ data }: ContactProps) {
 
         {/* Heading */}
         <ScrollReveal>
-          <h2 className="font-display font-bold text-4xl md:text-6xl text-[var(--color-text)] mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-6xl text-[var(--color-text)] mb-6">
             Let&apos;s Work Together
           </h2>
         </ScrollReveal>
@@ -48,12 +48,12 @@ export default function Contact({ data }: ContactProps) {
         <ScrollReveal delay={200}>
           <a
             href={`mailto:${data.email}`}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl
+            className="inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-xl
               bg-[var(--color-card)] border border-[var(--color-border)]
-              text-[var(--color-text)] font-sans font-semibold text-lg
+              text-[var(--color-text)] font-sans font-semibold text-sm sm:text-lg
               hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
               hover:scale-[1.02]
-              transition-all duration-300 active:scale-95 mb-12"
+              transition-all duration-300 active:scale-95 mb-10 sm:mb-12"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

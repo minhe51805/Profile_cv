@@ -57,7 +57,7 @@ export default function About({ data }: AboutProps) {
         </div>
 
         {/* Section Title */}
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-text)] mb-16">
+        <h2 className="font-display font-bold text-3xl md:text-5xl text-[var(--color-text)] mb-12 md:mb-16">
           Get To Know More
         </h2>
 
@@ -65,7 +65,7 @@ export default function About({ data }: AboutProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* LEFT: Image with Blur Glow */}
           <ScrollReveal className="relative flex justify-center lg:justify-start">
-            <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 blur-glow">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 blur-glow">
               {/* Image container */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
                 <Image
@@ -84,7 +84,7 @@ export default function About({ data }: AboutProps) {
           {/* RIGHT: Content */}
           <div className="flex flex-col gap-10">
             {/* GitHub Stats Row */}
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <ScrollReveal delay={100} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
                 <span className="stat-number-sm">{stars}</span>
                 <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">

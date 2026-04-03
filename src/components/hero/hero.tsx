@@ -47,54 +47,55 @@ export default function Hero({ data }: HeroProps) {
         <div className="absolute inset-0 bg-grid opacity-[0.08]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-10 w-full py-20 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 w-full py-12 sm:py-20 relative z-10">
         {/* Main 2-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 lg:gap-8 items-center min-h-[80vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-8 lg:gap-8 items-center min-h-[calc(100vh-80px)]">
 
           {/* LEFT: Text Content */}
           <div className="flex flex-col justify-center order-2 lg:order-1 animate-fade-up">
+
             {/* Label */}
-            <span className="text-sm font-sans font-medium text-[var(--color-accent)] uppercase tracking-widest mb-4">
-              Hello, I'm
+            <span className="text-xs sm:text-sm font-sans font-medium text-[var(--color-accent)] uppercase tracking-widest mb-2 sm:mb-4">
+              Hello, I&apos;m
             </span>
 
-            {/* Name - HUGE with text-stroke */}
-            <h1 className="font-display font-bold leading-none mb-4">
-              <span className="block text-[clamp(3rem,8vw,7rem)] text-stroke">
+            {/* Name - scaled for all screen sizes */}
+            <h1 className="font-display font-bold leading-none mb-3 sm:mb-4">
+              <span className="block text-[clamp(2rem,10vw,4rem)] md:text-[clamp(3rem,7vw,7rem)] text-stroke">
                 {data.name.split(" ")[0].toUpperCase()}
               </span>
-              <span className="block text-[clamp(3rem,8vw,7rem)] text-stroke">
+              <span className="block text-[clamp(2rem,10vw,4rem)] md:text-[clamp(3rem,7vw,7rem)] text-stroke">
                 {data.name.split(" ")[1]?.toUpperCase()}
               </span>
             </h1>
 
             {/* Title */}
-            <p className="text-xl md:text-2xl font-sans text-[var(--color-text-muted)] mb-6">
+            <p className="text-base sm:text-lg md:text-2xl font-sans text-[var(--color-text-muted)] mb-4 sm:mb-6">
               {data.title}
             </p>
 
             {/* Bio */}
-            <p className="text-base md:text-lg font-sans text-[var(--color-text-muted)] leading-relaxed max-w-lg mb-8">
+            <p className="text-sm sm:text-base md:text-lg font-sans text-[var(--color-text-muted)] leading-relaxed max-w-lg mb-6 sm:mb-8">
               {data.bio}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 mb-10">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-6 sm:mb-8">
               <a
                 href={data.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg
                   bg-[var(--color-accent)] text-[var(--color-bg)]
-                  font-sans font-semibold text-sm
+                  font-sans font-semibold text-xs sm:text-sm
                   hover:bg-[var(--color-accent-hover)]
                   transition-all duration-200 hover:scale-[1.02]
                   active:scale-95"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -111,18 +112,18 @@ export default function Hero({ data }: HeroProps) {
 
               <a
                 href={`mailto:${data.email}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg
                   bg-transparent text-[var(--color-text)]
                   border border-[var(--color-border)]
-                  font-sans font-semibold text-sm
+                  font-sans font-semibold text-xs sm:text-sm
                   hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
                   transition-all duration-200 hover:scale-[1.02]
                   active:scale-95"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -138,13 +139,13 @@ export default function Hero({ data }: HeroProps) {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               <a
                 href={data.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="w-10 h-10 rounded-full flex items-center justify-center
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
                   border border-[var(--color-border)]
                   text-[var(--color-text-muted)]
                   hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
@@ -153,8 +154,8 @@ export default function Hero({ data }: HeroProps) {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -167,7 +168,7 @@ export default function Hero({ data }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-10 h-10 rounded-full flex items-center justify-center
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
                   border border-[var(--color-border)]
                   text-[var(--color-text-muted)]
                   hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
@@ -176,8 +177,8 @@ export default function Hero({ data }: HeroProps) {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -189,37 +190,37 @@ export default function Hero({ data }: HeroProps) {
 
           {/* RIGHT: Profile Image with Blur Glow */}
           <ScrollReveal delay={200} className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]">
+            <div className="relative w-36 h-36 xs:w-44 xs:h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-[420px] lg:h-[420px]">
               {/* Blur Glow Behind Image */}
               <div
                 className="absolute inset-0 rounded-full
-                  bg-[var(--color-accent)] blur-[120px] opacity-25
-                  scale-90 -translate-x-4 -translate-y-4"
+                  bg-[var(--color-accent)] blur-[80px] sm:blur-[100px] md:blur-[120px] opacity-25
+                  scale-90 -translate-x-2 sm:-translate-x-4 -translate-y-2 sm:-translate-y-4"
               />
 
               {/* Border Ring */}
               <div
-                className="absolute inset-4 rounded-full
-                  border-2 border-[var(--color-accent)]/30"
+                className="absolute inset-3 xs:inset-4 sm:inset-6 md:inset-8 lg:inset-12 rounded-full
+                  border border-[var(--color-accent)]/30"
               />
 
               {/* Profile Image */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[var(--color-bg)]">
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 sm:border-4 border-[var(--color-bg)]">
                 <Image
                   src={data.profileImage}
                   alt={`${data.name} profile`}
                   fill
                   className="object-cover object-center"
                   priority
-                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 384px, 420px"
+                  sizes="(max-width: 480px) 176px, (max-width: 640px) 224px, (max-width: 768px) 288px, (max-width: 1024px) 384px, 420px"
                 />
               </div>
             </div>
           </ScrollReveal>
         </div>
 
-        {/* Stats Row at Bottom */}
-        <div className="grid grid-cols-3 gap-4 md:gap-8 mt-16 pt-8 border-t border-[var(--color-border)]/50">
+        {/* Stats Row at Bottom — hidden on mobile */}
+        <div className="hidden sm:grid grid-cols-3 gap-4 md:gap-8 mt-8 sm:mt-12 md:mt-16 pt-4 sm:pt-6 md:pt-8 border-t border-[var(--color-border)]/50">
           <ScrollReveal delay={100} className="text-center">
             <span className="stat-number">{repos}</span>
             <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
@@ -229,7 +230,7 @@ export default function Hero({ data }: HeroProps) {
           <ScrollReveal delay={200} className="text-center">
             <span className="stat-number">{stars}</span>
             <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
-              Total<br />Stars
+              Total Stars
             </p>
           </ScrollReveal>
           <ScrollReveal delay={300} className="text-center">

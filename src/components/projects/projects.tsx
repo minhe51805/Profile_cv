@@ -38,7 +38,7 @@ export default function Projects({ data }: ProjectsProps) {
         <div className="mb-4">
           <span className="section-label">Selected Work</span>
         </div>
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-text)] mb-16">
+        <h2 className="font-display font-bold text-3xl md:text-5xl text-[var(--color-text)] mb-10 md:mb-16">
           Recent Projects
         </h2>
 

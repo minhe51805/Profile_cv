@@ -78,7 +78,7 @@ export default function Experience({ data }: ExperienceProps) {
         </div>
 
         {/* Section Title */}
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-text)] mb-16">
+        <h2 className="font-display font-bold text-3xl md:text-5xl text-[var(--color-text)] mb-12 md:mb-16">
           What I Know
         </h2>
 

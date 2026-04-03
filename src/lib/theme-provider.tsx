@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useSyncExternalStore } from "react";
 
 type Theme = "dark" | "light";
 
@@ -11,19 +11,24 @@ const ThemeContext = createContext<{
   toggleTheme: () => {},
 });
 
-function getInitialTheme(): Theme {
+function getSnapshot(): Theme {
   if (typeof window === "undefined") return "dark";
   return (localStorage.getItem("theme") as Theme) || "dark";
 }
 
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const theme = useSyncExternalStore(subscribe, getSnapshot, () => "dark");
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     localStorage.setItem("theme", next);
     document.documentElement.setAttribute("data-theme", next);
+    window.dispatchEvent(new Event("storage"));
   };
 
   useEffect(() => {

@@ -82,14 +82,7 @@ export default function RootLayout({
       <body className={`${syne.variable} ${dmSans.variable} min-h-full flex flex-col antialiased`}>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme') || 'dark';
-                  document.documentElement.setAttribute('data-theme', theme);
-                } catch (e) {}
-              })();
-            `,
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})()`,
           }}
         />
         <a
