@@ -35,9 +35,7 @@ interface HeroProps {
 
 export default function Hero({ data }: HeroProps) {
   // Stats from GitHub data
-  const yearsExp = "2+";
-  const totalSkills = data.skills.frontend.length + data.skills.backend.length;
-  const totalProjects = data.projects.length;
+  const { repos, followers, stars } = data.githubStats;
 
   return (
     <section
@@ -223,21 +221,21 @@ export default function Hero({ data }: HeroProps) {
         {/* Stats Row at Bottom */}
         <div className="grid grid-cols-3 gap-4 md:gap-8 mt-16 pt-8 border-t border-[var(--color-border)]/50">
           <ScrollReveal delay={100} className="text-center">
-            <span className="stat-number">{yearsExp}</span>
+            <span className="stat-number">{repos}</span>
             <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
-              Years<br />Experience
+              Repositories
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200} className="text-center">
-            <span className="stat-number">{totalSkills}</span>
+            <span className="stat-number">{stars}</span>
             <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
-              Skills<br />Acquired
+              Total<br />Stars
             </p>
           </ScrollReveal>
           <ScrollReveal delay={300} className="text-center">
-            <span className="stat-number">{totalProjects}</span>
+            <span className="stat-number">{followers}</span>
             <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
-              Projects<br />Completed
+              Followers
             </p>
           </ScrollReveal>
         </div>

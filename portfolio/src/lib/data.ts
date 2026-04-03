@@ -2,7 +2,7 @@ export const portfolioData = {
   name: "Minh Truong",
   displayName: "truongminhdev",
   title: "Frontend Developer",
-  bio: "A passionate frontend developer with 2+ years of experience building responsive web applications. Currently studying Information Technology at Hutech University. I love creating clean, user-friendly interfaces with modern technologies.",
+  bio: "A passionate frontend developer and Year 4 IT student at Hutech University. Building responsive web applications and exploring modern technologies. I love creating clean, user-friendly interfaces with React, TypeScript, and Next.js.",
   shortBio: "Frontend dev focused on React, TypeScript, and modern web technologies.",
   email: "truongminh0949@gmail.com",
   github: "https://github.com/minhe51805",
@@ -13,7 +13,7 @@ export const portfolioData = {
     school: "Hutech University",
     degree: "Information Technology",
   },
-  experience: "2+ Years Frontend Development",
+  experience: "Frontend Developer",
   githubStats: {
     repos: 24,
     followers: 7,

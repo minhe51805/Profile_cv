@@ -33,9 +33,6 @@ interface AboutProps {
 }
 
 export default function About({ data }: AboutProps) {
-  const yearsExp = "2+";
-  const totalSkills = data.skills.frontend.length + data.skills.backend.length;
-  const totalProjects = data.projects.length;
   const { repos, followers, following, stars } = data.githubStats;
 
   const scrollToExperience = () => {
@@ -107,9 +104,9 @@ export default function About({ data }: AboutProps) {
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={250} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{yearsExp}</span>
+                <span className="stat-number-sm">{following}</span>
                 <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Years Exp
+                  Following
                 </p>
               </ScrollReveal>
             </div>
