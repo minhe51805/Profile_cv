@@ -22,7 +22,7 @@ function subscribe(callback: () => void) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, () => "dark");
+  const theme = useSyncExternalStore<Theme>(subscribe, getSnapshot, () => "dark");
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
