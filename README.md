@@ -12,6 +12,8 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
 
 ## Features
 
+
+
 - Dark/Light mode with localStorage persistence
 - Responsive design (mobile-first)
 - Smooth scroll navigation
