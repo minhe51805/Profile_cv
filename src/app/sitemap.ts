@@ -1,11 +1,13 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://minhtruong.dev",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      lastModified: "2026-04-03",
+      changeFrequency: "weekly",
       priority: 1,
     },
   ];
