@@ -10,9 +10,16 @@ interface Education {
 
 interface PortfolioData {
   bio: string;
+  location: string;
   experience: string;
   education: Education;
   aboutImage: string;
+  githubStats: {
+    repos: number;
+    followers: number;
+    following: number;
+    stars: number;
+  };
   skills: {
     frontend: { name: string; level: string }[];
     backend: { name: string; level: string }[];
@@ -29,6 +36,7 @@ export default function About({ data }: AboutProps) {
   const yearsExp = "2+";
   const totalSkills = data.skills.frontend.length + data.skills.backend.length;
   const totalProjects = data.projects.length;
+  const { repos, followers, following, stars } = data.githubStats;
 
   const scrollToExperience = () => {
     const target = document.querySelector("#experience");
@@ -78,24 +86,30 @@ export default function About({ data }: AboutProps) {
 
           {/* RIGHT: Content */}
           <div className="flex flex-col gap-10">
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-4">
-              <ScrollReveal delay={100} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+            {/* GitHub Stats Row */}
+            <div className="grid grid-cols-4 gap-3">
+              <ScrollReveal delay={100} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{stars}</span>
+                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Stars
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={150} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{repos}</span>
+                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Repos
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={200} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{followers}</span>
+                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Followers
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={250} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
                 <span className="stat-number-sm">{yearsExp}</span>
-                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
                   Years Exp
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={200} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{totalSkills}</span>
-                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Skills
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={300} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{totalProjects}</span>
-                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Projects
                 </p>
               </ScrollReveal>
             </div>

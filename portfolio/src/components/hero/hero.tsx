@@ -5,14 +5,22 @@ import ScrollReveal from "@/components/scroll-reveal";
 
 interface PortfolioData {
   name: string;
+  displayName: string;
   title: string;
   bio: string;
   email: string;
   github: string;
   facebook: string;
   cvUrl: string;
+  location: string;
   profileImage: string;
   experience: string;
+  githubStats: {
+    repos: number;
+    followers: number;
+    following: number;
+    stars: number;
+  };
   skills: {
     frontend: { name: string; level: string }[];
     backend: { name: string; level: string }[];
@@ -26,7 +34,7 @@ interface HeroProps {
 }
 
 export default function Hero({ data }: HeroProps) {
-  // Calculate stats from data
+  // Stats from GitHub data
   const yearsExp = "2+";
   const totalSkills = data.skills.frontend.length + data.skills.backend.length;
   const totalProjects = data.projects.length;
