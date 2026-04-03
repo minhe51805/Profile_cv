@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://minhtruong.dev"),
   title: "Minh Truong | Frontend Developer",
   description:
-    "Portfolio of Minh Truong - a passionate Frontend Developer with 2+ years of experience building responsive web applications. Specializing in React, TypeScript, and modern frontend technologies. Based in Vietnam.",
+    "Portfolio of Minh Truong - a passionate Frontend Developer and Year 4 IT student at Hutech University. Specializing in React, TypeScript, and modern frontend technologies. Based in Vietnam.",
   keywords: [
     "Frontend Developer",
     "React",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "Minh Truong Portfolio",
     title: "Minh Truong | Frontend Developer",
     description:
-      "Portfolio of Minh Truong - Frontend Developer with 2+ years experience.",
+      "Portfolio of Minh Truong - Frontend Developer and Year 4 IT student.",
     images: [
       {
         url: "/img/Asset 1@4x-8.png",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Minh Truong | Frontend Developer",
     description:
-      "Portfolio of Minh Truong - Frontend Developer with 2+ years experience.",
+      "Portfolio of Minh Truong - Frontend Developer and Year 4 IT student.",
     images: ["/img/Asset 1@4x-8.png"],
     creator: "@minhe51805",
   },
@@ -80,6 +80,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${syne.variable} ${dmSans.variable} min-h-full flex flex-col antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme') || 'dark';
+                  document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-[var(--color-accent)] focus:text-[var(--color-bg)] focus:px-4 focus:py-2 focus:rounded"
