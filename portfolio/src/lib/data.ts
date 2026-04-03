@@ -1,0 +1,58 @@
+export const portfolioData = {
+  name: "Minh Truong",
+  title: "Frontend Developer",
+  bio: "A passionate frontend developer with 2+ years of experience building responsive web applications. Currently studying Information Technology at Hutech University. I love creating clean, user-friendly interfaces with modern technologies.",
+  email: "truongminh0949@gmail.com",
+  github: "https://github.com/minhe51805",
+  facebook: "https://www.facebook.com/profile.php?id=100083981328770",
+  cvUrl: "/asset/Truong-Duong-Bao-Minh-TopCV.vn-010924.174113.pdf",
+  education: {
+    school: "Hutech University",
+    degree: "Information Technology",
+  },
+  experience: "2+ Years Frontend Development",
+  skills: {
+    frontend: [
+      { name: "HTML", level: "Experienced" },
+      { name: "CSS", level: "Experienced" },
+      { name: "SASS", level: "Experienced" },
+      { name: "JavaScript", level: "Basic" },
+      { name: "TypeScript", level: "Basic" },
+      { name: "Material UI", level: "Intermediate" },
+    ],
+    backend: [
+      { name: "PostgreSQL", level: "Basic" },
+      { name: "Node.js", level: "Intermediate" },
+      { name: "Express.js", level: "Intermediate" },
+      { name: "Git", level: "Intermediate" },
+    ],
+  },
+  projects: [
+    {
+      name: "Project One",
+      description: "A modern web application built with React and Node.js.",
+      tags: ["React", "Node.js"],
+      githubUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      demoUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      imageUrl: "/img/project1.png",
+    },
+    {
+      name: "Project Two",
+      description: "A responsive website showcasing frontend development skills.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      githubUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      demoUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      imageUrl: "/img/project2.png",
+    },
+    {
+      name: "Project Three",
+      description: "An interactive web project with modern UI/UX design.",
+      tags: ["React", "TypeScript", "Tailwind"],
+      githubUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      demoUrl: "https://github.com/minhe51805/Web_HTML1.git",
+      imageUrl: "/img/project3.png",
+    },
+  ],
+  profileImage: "/img/Asset 1@4x-8.png",
+  aboutImage: "/img/About-picture.png",
+};
