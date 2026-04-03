@@ -13,6 +13,12 @@ interface PortfolioData {
   experience: string;
   education: Education;
   aboutImage: string;
+  skills: {
+    frontend: { name: string; level: string }[];
+    backend: { name: string; level: string }[];
+  };
+  projects: { name: string }[];
+  [key: string]: unknown;
 }
 
 interface AboutProps {
@@ -20,6 +26,10 @@ interface AboutProps {
 }
 
 export default function About({ data }: AboutProps) {
+  const yearsExp = "2+";
+  const totalSkills = data.skills.frontend.length + data.skills.backend.length;
+  const totalProjects = data.projects.length;
+
   const scrollToExperience = () => {
     const target = document.querySelector("#experience");
     if (target) target.scrollIntoView({ behavior: "smooth" });
@@ -30,30 +40,29 @@ export default function About({ data }: AboutProps) {
       id="about"
       className="relative py-20 md:py-32 bg-[var(--color-bg)]"
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+      {/* Background Grid */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-grid opacity-[0.06]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-10">
         {/* Section Label */}
         <div className="mb-4">
-          <span className="text-sm font-sans font-medium text-[var(--color-text-muted)] uppercase tracking-widest">
-            Get To Know More
-          </span>
+          <span className="section-label">About Me</span>
         </div>
 
         {/* Section Title */}
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-text)] mb-12">
-          About Me
+        <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-text)] mb-16">
+          Get To Know More
         </h2>
 
         {/* Content Grid */}
-        <ScrollReveal className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Image */}
-          <div className="relative flex justify-center lg:justify-start">
-            <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              {/* Decorative frame */}
-              <div className="absolute -top-4 -left-4 w-full h-full border-2 border-[var(--color-accent)] opacity-30 rounded-lg" />
-              <div className="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-border)] rounded-lg" />
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* LEFT: Image with Blur Glow */}
+          <ScrollReveal className="relative flex justify-center lg:justify-start">
+            <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 blur-glow">
               {/* Image container */}
-              <div className="relative w-full h-full rounded-lg overflow-hidden bg-[var(--color-card)]">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
                 <Image
                   src={data.aboutImage}
                   alt="About Minh Truong"
@@ -62,85 +71,105 @@ export default function About({ data }: AboutProps) {
                   sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
                 />
               </div>
+              {/* Decorative ring overlay */}
+              <div className="absolute inset-0 rounded-2xl border border-[var(--color-accent)]/20" />
             </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Right Column: Content */}
-          <div className="flex flex-col gap-8">
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Experience Card */}
-              <div className="p-6 rounded-lg bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="var(--color-accent)"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-1">
-                      Experience
-                    </p>
-                    <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
-                      {data.experience}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Education Card */}
-              <div className="p-6 rounded-lg bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="var(--color-accent)"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                      <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-1">
-                      Education
-                    </p>
-                    <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
-                      {data.education.school}
-                    </p>
-                    <p className="text-xs font-sans text-[var(--color-text-muted)]">
-                      {data.education.degree}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* RIGHT: Content */}
+          <div className="flex flex-col gap-10">
+            {/* Stats Row */}
+            <div className="grid grid-cols-3 gap-4">
+              <ScrollReveal delay={100} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{yearsExp}</span>
+                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Years Exp
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={200} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{totalSkills}</span>
+                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Skills
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={300} className="text-center p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <span className="stat-number-sm">{totalProjects}</span>
+                <p className="text-[10px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
+                  Projects
+                </p>
+              </ScrollReveal>
             </div>
 
             {/* Bio */}
-            <div>
+            <ScrollReveal delay={200}>
               <p className="text-base md:text-lg font-sans text-[var(--color-text-muted)] leading-relaxed">
                 {data.bio}
               </p>
-            </div>
+            </ScrollReveal>
+
+            {/* Info Row */}
+            <ScrollReveal delay={300} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Experience */}
+              <div className="flex items-start gap-3 p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--color-accent)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-0.5">
+                    Experience
+                  </p>
+                  <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
+                    {data.experience}
+                  </p>
+                </div>
+              </div>
+
+              {/* Education */}
+              <div className="flex items-start gap-3 p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
+                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--color-accent)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-0.5">
+                    Education
+                  </p>
+                  <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
+                    {data.education.school}
+                  </p>
+                  <p className="text-xs font-sans text-[var(--color-text-muted)]">
+                    {data.education.degree}
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
 
       {/* Scroll Indicator */}

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="ps-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f0a"/>
+      <stop offset="100%" style="stop-color:#0f1a0f"/>
+    </linearGradient>
+    <linearGradient id="ps-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:0.9"/>
+    </linearGradient>
+    <radialGradient id="ps-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#ps-bg)"/>
+  <!-- Subtle hex grid pattern -->
+  <g fill="none" stroke="#f59e0b" stroke-opacity="0.04" stroke-width="1">
+    <polygon points="100,50 125,30 175,30 200,50 175,70 125,70"/>
+    <polygon points="200,50 225,30 275,30 300,50 275,70 225,70"/>
+    <polygon points="300,50 325,30 375,30 400,50 375,70 325,70"/>
+    <polygon points="500,50 525,30 575,30 600,50 575,70 525,70"/>
+    <polygon points="600,50 625,30 675,30 700,50 675,70 625,70"/>
+    <polygon points="150,100 175,80 225,80 250,100 225,120 175,120"/>
+    <polygon points="350,100 375,80 425,80 450,100 425,120 375,120"/>
+    <polygon points="550,100 575,80 625,80 650,100 625,120 575,120"/>
+    <polygon points="100,130 125,110 175,110 200,130 175,150 125,150"/>
+    <polygon points="300,130 325,110 375,110 400,130 375,150 325,150"/>
+    <polygon points="500,130 525,110 575,110 600,130 575,150 525,150"/>
+    <polygon points="600,130 625,110 675,110 700,130 675,150 625,150"/>
+    <polygon points="200,160 225,140 275,140 300,160 275,180 225,180"/>
+    <polygon points="400,160 425,140 475,140 500,160 475,180 425,180"/>
+    <polygon points="550,160 575,140 625,140 650,160 625,180 575,180"/>
+  </g>
+  <ellipse cx="400" cy="225" rx="280" ry="170" fill="url(#ps-glow)"/>
+  <!-- Pulsar/star burst center -->
+  <g transform="translate(400,200)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#f59e0b" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 8"/>
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#f59e0b" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="4 6"/>
+    <!-- Core -->
+    <circle cx="0" cy="0" r="30" fill="none" stroke="url(#ps-accent)" stroke-width="2"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="url(#ps-accent)" stroke-width="1.5" stroke-opacity="0.7"/>
+    <circle cx="0" cy="0" r="6" fill="#f59e0b" fill-opacity="0.8"/>
+    <!-- Rays -->
+    <g stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round">
+      <line x1="0" y1="-30" x2="0" y2="-90"/>
+      <line x1="0" y1="30" x2="0" y2="90"/>
+      <line x1="-30" y1="0" x2="-90" y2="0"/>
+      <line x1="30" y1="0" x2="90" y2="0"/>
+      <line x1="-21" y1="-21" x2="-64" y2="-64"/>
+      <line x1="21" y1="-21" x2="64" y2="-64"/>
+      <line x1="-21" y1="21" x2="-64" y2="64"/>
+      <line x1="21" y1="21" x2="64" y2="64"/>
+    </g>
+    <!-- Small orbiting dots -->
+    <circle cx="80" cy="0" r="3" fill="#f59e0b" fill-opacity="0.6"/>
+    <circle cx="0" cy="-80" r="2" fill="#f59e0b" fill-opacity="0.4"/>
+    <circle cx="-57" cy="57" r="2.5" fill="#f59e0b" fill-opacity="0.5"/>
+  </g>
+  <!-- Data flow lines -->
+  <g stroke="#f59e0b" stroke-width="1" stroke-opacity="0.08" fill="none" stroke-dasharray="2 6">
+    <path d="M320,350 Q360,320 400,350 Q440,380 480,350"/>
+    <path d="M280,370 Q330,330 400,360 Q470,390 520,370"/>
+    <path d="M340,300 Q370,280 400,300 Q430,320 460,300"/>
+  </g>
+  <text x="400" y="430" font-family="system-ui, sans-serif" font-size="13" fill="#f59e0b" fill-opacity="0.6" text-anchor="middle" font-weight="500">FAST MODERN DATABASE CLIENT</text>
+</svg>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import ScrollReveal from "@/components/scroll-reveal";
-import { useRef } from "react";
 
 interface PortfolioData {
   name: string;
@@ -13,6 +12,12 @@ interface PortfolioData {
   facebook: string;
   cvUrl: string;
   profileImage: string;
+  experience: string;
+  skills: {
+    frontend: { name: string; level: string }[];
+    backend: { name: string; level: string }[];
+  };
+  projects: { name: string }[];
   [key: string]: unknown;
 }
 
@@ -21,88 +26,54 @@ interface HeroProps {
 }
 
 export default function Hero({ data }: HeroProps) {
-  const heroRef = useRef<HTMLElement>(null);
-
-  const scrollToAbout = () => {
-    const target = document.querySelector("#about");
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  };
+  // Calculate stats from data
+  const yearsExp = "2+";
+  const totalSkills = data.skills.frontend.length + data.skills.backend.length;
+  const totalProjects = data.projects.length;
 
   return (
     <section
       id="hero"
-      ref={heroRef}
-      className="relative min-h-screen flex items-center
-        bg-[var(--color-bg)] overflow-hidden"
+      className="relative min-h-screen flex items-center bg-[var(--color-bg)] overflow-hidden"
     >
-      {/* Background decorative element */}
-      <div
-        className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px]
-          rounded-full opacity-[0.03] bg-[var(--color-accent)]
-          -translate-y-1/2 translate-x-1/4 pointer-events-none"
-      />
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-grid opacity-[0.08]" />
+      </div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-10 w-full py-20">
-        <ScrollReveal className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center min-h-[80vh]">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 w-full py-20 relative z-10">
+        {/* Main 2-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 lg:gap-8 items-center min-h-[80vh]">
 
-          {/* Left: Profile Image */}
-          <div
-            className="relative flex justify-center md:justify-start order-1 md:order-2"
-          >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              {/* Decorative ring */}
-              <div
-                className="absolute inset-0 rounded-full
-                  border-2 border-[var(--color-accent)] opacity-30
-                  scale-105 animate-pulse"
-              />
-              <div
-                className="absolute inset-4 rounded-full
-                  border border-[var(--color-border)]"
-              />
-              <div className="relative w-full h-full rounded-full overflow-hidden">
-                <Image
-                  src={data.profileImage}
-                  alt={`${data.name} profile`}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 384px, 448px"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Text Content */}
-          <div className="order-2 md:order-1 flex flex-col gap-6">
+          {/* LEFT: Text Content */}
+          <div className="flex flex-col justify-center order-2 lg:order-1 animate-fade-up">
             {/* Label */}
-            <span
-              className="inline-block text-sm font-sans font-medium
-                text-[var(--color-accent)] uppercase tracking-widest
-                border border-[var(--color-accent)] px-3 py-1 rounded-full"
-            >
-              Hello, I&apos;m
+            <span className="text-sm font-sans font-medium text-[var(--color-accent)] uppercase tracking-widest mb-4">
+              Hello, I'm
             </span>
 
-            {/* Name */}
-            <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl
-              text-[var(--color-text)] leading-tight">
-              {data.name}
+            {/* Name - HUGE with text-stroke */}
+            <h1 className="font-display font-bold leading-none mb-4">
+              <span className="block text-[clamp(3rem,8vw,7rem)] text-stroke">
+                {data.name.split(" ")[0].toUpperCase()}
+              </span>
+              <span className="block text-[clamp(3rem,8vw,7rem)] text-stroke">
+                {data.name.split(" ")[1]?.toUpperCase()}
+              </span>
             </h1>
 
-            {/* Title / Subtitle */}
-            <p className="text-xl md:text-2xl font-sans text-[var(--color-text-muted)]">
+            {/* Title */}
+            <p className="text-xl md:text-2xl font-sans text-[var(--color-text-muted)] mb-6">
               {data.title}
             </p>
 
             {/* Bio */}
-            <p className="text-base md:text-lg font-sans text-[var(--color-text-muted)]
-              leading-relaxed max-w-lg">
+            <p className="text-base md:text-lg font-sans text-[var(--color-text-muted)] leading-relaxed max-w-lg mb-8">
               {data.bio}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-4 mb-10">
               <a
                 href={data.cvUrl}
                 target="_blank"
@@ -112,7 +83,6 @@ export default function Hero({ data }: HeroProps) {
                   font-sans font-semibold text-sm
                   hover:bg-[var(--color-accent-hover)]
                   transition-all duration-200 hover:scale-[1.02]
-                  hover:shadow-lg hover:shadow-[var(--color-accent)]/20
                   active:scale-95"
               >
                 <svg
@@ -162,22 +132,23 @@ export default function Hero({ data }: HeroProps) {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-4">
               <a
                 href={data.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="w-10 h-10 rounded-full flex items-center justify-center
-                  bg-[var(--color-bg-elevated)] border border-[var(--color-border)]
+                  border border-[var(--color-border)]
                   text-[var(--color-text-muted)]
                   hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
-                  transition-all duration-200 hover:scale-110"
+                  hover:scale-110
+                  transition-all duration-200"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -191,15 +162,16 @@ export default function Hero({ data }: HeroProps) {
                 rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-10 h-10 rounded-full flex items-center justify-center
-                  bg-[var(--color-bg-elevated)] border border-[var(--color-border)]
+                  border border-[var(--color-border)]
                   text-[var(--color-text-muted)]
                   hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]
-                  transition-all duration-200 hover:scale-110"
+                  hover:scale-110
+                  transition-all duration-200"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -208,12 +180,67 @@ export default function Hero({ data }: HeroProps) {
               </a>
             </div>
           </div>
-        </ScrollReveal>
+
+          {/* RIGHT: Profile Image with Blur Glow */}
+          <ScrollReveal delay={200} className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]">
+              {/* Blur Glow Behind Image */}
+              <div
+                className="absolute inset-0 rounded-full
+                  bg-[var(--color-accent)] blur-[120px] opacity-25
+                  scale-90 -translate-x-4 -translate-y-4"
+              />
+
+              {/* Border Ring */}
+              <div
+                className="absolute inset-4 rounded-full
+                  border-2 border-[var(--color-accent)]/30"
+              />
+
+              {/* Profile Image */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[var(--color-bg)]">
+                <Image
+                  src={data.profileImage}
+                  alt={`${data.name} profile`}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 384px, 420px"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* Stats Row at Bottom */}
+        <div className="grid grid-cols-3 gap-4 md:gap-8 mt-16 pt-8 border-t border-[var(--color-border)]/50">
+          <ScrollReveal delay={100} className="text-center">
+            <span className="stat-number">{yearsExp}</span>
+            <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
+              Years<br />Experience
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={200} className="text-center">
+            <span className="stat-number">{totalSkills}</span>
+            <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
+              Skills<br />Acquired
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={300} className="text-center">
+            <span className="stat-number">{totalProjects}</span>
+            <p className="text-xs md:text-sm font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1">
+              Projects<br />Completed
+            </p>
+          </ScrollReveal>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
       <button
-        onClick={scrollToAbout}
+        onClick={() => {
+          const target = document.querySelector("#about");
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        }}
         aria-label="Scroll to about section"
         className="absolute bottom-8 left-1/2 -translate-x-1/2
           flex flex-col items-center gap-2

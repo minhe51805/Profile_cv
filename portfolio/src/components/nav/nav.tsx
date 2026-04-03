@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ThemeToggle from "@/components/theme-toggle/theme-toggle";
 
 const navLinks = [
+  { label: "Home", href: "#" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
@@ -12,20 +13,13 @@ const navLinks = [
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const update = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
-    };
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
@@ -34,25 +28,24 @@ export default function Nav() {
 
   return (
     <nav
-      className="sticky top-0 z-50 w-full
+      className="sticky top-0 z-50 w-full py-3
         bg-[var(--color-bg)]/80 backdrop-blur-md
         border-b border-[var(--color-border)]
         transition-all duration-300"
     >
-      {/* Scroll Progress Bar */}
-      <div
-        className="fixed top-0 left-0 h-[2px] bg-[var(--color-accent)] z-[60] transition-all duration-100"
-        style={{ width: `${scrollProgress}%` }}
-      />
-      <div className="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 h-12 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#"
           aria-label="Minh Truong - Back to top"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick("#");
+          }}
           className="font-display font-bold text-lg text-[var(--color-text)]
             hover:text-[var(--color-accent)] transition-colors duration-200"
         >
-          Minh Truong
+          MT<span className="text-[var(--color-accent)]">.</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -77,7 +70,7 @@ export default function Nav() {
           <ThemeToggle />
         </div>
 
-        {/* Mobile Theme Toggle */}
+        {/* Mobile Controls */}
         <div className="flex md:hidden items-center gap-3">
           <ThemeToggle />
           {/* Hamburger Button */}
@@ -118,8 +111,7 @@ export default function Nav() {
                 handleNavClick(link.href);
               }}
               className="text-base font-sans text-[var(--color-text-muted)]
-                hover:text-[var(--color-accent)] transition-colors duration-200
-                py-1"
+                hover:text-[var(--color-accent)] transition-colors duration-200 py-1"
             >
               {link.label}
             </a>
