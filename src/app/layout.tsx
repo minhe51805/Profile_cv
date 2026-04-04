@@ -1,8 +1,14 @@
-import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Syne, DM_Sans, Share_Tech_Mono } from "next/font/google";
 import { ThemeProvider } from "@/lib/theme-provider";
 import Nav from "@/components/nav/nav";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const syne = Syne({
   variable: "--font-syne",
@@ -12,6 +18,13 @@ const syne = Syne({
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const shareTechMono = Share_Tech_Mono({
+  variable: "--font-share-mono",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
@@ -79,10 +92,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${syne.variable} ${dmSans.variable} min-h-full flex flex-col antialiased`}>
+      <body className={`${syne.variable} ${dmSans.variable} ${shareTechMono.variable} min-h-full flex flex-col antialiased`}>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})()`,
           }}
         />
         <a
@@ -92,6 +105,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider>
+          {/* Grid Background */}
+          <div className="grid-bg" />
           <Nav />
           {children}
         </ThemeProvider>

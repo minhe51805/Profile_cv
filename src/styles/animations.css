@@ -1,3 +1,4 @@
+/* === Bounce Arrow === */
 @keyframes bounce-arrow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
@@ -8,9 +9,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .transition-all,
   .animate-bounce-arrow {
     animation: none !important;
-    transition: none !important;
   }
 }

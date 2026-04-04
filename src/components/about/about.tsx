@@ -3,209 +3,96 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/scroll-reveal";
 
-interface Education {
-  school: string;
-  degree: string;
-}
-
 interface PortfolioData {
-  bio: string;
-  location: string;
-  experience: string;
-  education: Education;
+  bio: string; location: string; experience: string;
+  education: { school: string; degree: string };
   aboutImage: string;
-  githubStats: {
-    repos: number;
-    followers: number;
-    following: number;
-    stars: number;
-  };
-  skills: {
-    frontend: { name: string; level: string }[];
-    backend: { name: string; level: string }[];
-  };
-  projects: { name: string }[];
+  githubStats: { repos: number; followers: number; following: number; stars: number };
   [key: string]: unknown;
 }
 
-interface AboutProps {
-  data: PortfolioData;
-}
-
-export default function About({ data }: AboutProps) {
+export default function About({ data }: { data: PortfolioData }) {
   const { repos, followers, following, stars } = data.githubStats;
 
-  const scrollToExperience = () => {
-    const target = document.querySelector("#experience");
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section
-      id="about"
-      className="relative py-20 md:py-32 bg-[var(--color-bg)]"
-    >
-      {/* Background Grid */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid opacity-[0.06]" />
-      </div>
+    <section id="about" className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-[var(--color-bg)]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
-      <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-10">
-        {/* Section Label */}
-        <div className="mb-4">
-          <span className="section-label">About Me</span>
-        </div>
+        {/* BROKEN GRID: Image takes left half, content flows right with offset */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 xl:gap-24">
 
-        {/* Section Title */}
-        <h2 className="font-display font-bold text-3xl md:text-5xl text-[var(--color-text)] mb-12 md:mb-16">
-          Get To Know More
-        </h2>
-
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* LEFT: Image with Blur Glow */}
-          <ScrollReveal className="relative flex justify-center lg:justify-start">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 blur-glow">
-              {/* Image container */}
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                <Image
-                  src={data.aboutImage}
-                  alt="About Minh Truong"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
-                />
+          {/* LEFT: Image - Fixed position, sticky */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <ScrollReveal>
+              <div className="relative">
+                <div className="img-frame w-full aspect-square border border-[var(--color-border)]">
+                  <Image src={data.aboutImage} alt="About" fill className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
+                {/* Decorative square behind */}
+                <div className="absolute -z-10 -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-24 h-24 sm:w-32 sm:h-32 border border-[var(--color-border)] hidden lg:block" />
               </div>
-              {/* Decorative ring overlay */}
-              <div className="absolute inset-0 rounded-2xl border border-[var(--color-accent)]/20" />
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+          </div>
 
-          {/* RIGHT: Content */}
-          <div className="flex flex-col gap-10">
-            {/* GitHub Stats Row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <ScrollReveal delay={100} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{stars}</span>
-                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Stars
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={150} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{repos}</span>
-                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Repos
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={200} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{followers}</span>
-                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Followers
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={250} className="text-center p-3 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <span className="stat-number-sm">{following}</span>
-                <p className="text-[9px] font-sans text-[var(--color-text-muted)] uppercase tracking-wider mt-1 leading-tight">
-                  Following
-                </p>
-              </ScrollReveal>
-            </div>
+          {/* RIGHT: Content - Flows */}
+          <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 lg:pt-12 xl:pt-16">
+
+            <ScrollReveal>
+              <div>
+                <span className="section-label text-[9px] sm:text-[10px]">About Me</span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[var(--color-text)] leading-[0.9]">
+                  Get To Know<span className="block text-[var(--color-warm)]">More</span>
+                </h2>
+              </div>
+            </ScrollReveal>
+
+            {/* Stats */}
+            <ScrollReveal delay={100}>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                {[
+                  { label: "GitHub Stars", value: stars },
+                  { label: "Repositories", value: repos },
+                  { label: "Followers", value: followers },
+                  { label: "Following", value: following }
+                ].map((s) => (
+                  <div key={s.label} className="stat py-3 sm:py-4 px-3 sm:px-4">
+                    <span className="stat-number-sm text-xl sm:text-2xl">{s.value}</span>
+                    <span className="stat-label text-[8px] sm:text-[9px]">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
 
             {/* Bio */}
             <ScrollReveal delay={200}>
-              <p className="text-base md:text-lg font-sans text-[var(--color-text-muted)] leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-muted)] leading-relaxed">
                 {data.bio}
               </p>
             </ScrollReveal>
 
-            {/* Info Row */}
-            <ScrollReveal delay={300} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Experience */}
-              <div className="flex items-start gap-3 p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--color-accent)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                  </svg>
+            {/* Info Cards */}
+            <ScrollReveal delay={300}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="card p-4 sm:p-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 sm:mb-3 card-flat flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" strokeWidth="2"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
+                  </div>
+                  <p className="text-[9px] sm:text-[10px] text-[var(--color-text-muted)] uppercase mb-1">Experience</p>
+                  <p className="text-sm font-semibold">{data.experience}</p>
                 </div>
-                <div>
-                  <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-0.5">
-                    Experience
-                  </p>
-                  <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
-                    {data.experience}
-                  </p>
-                </div>
-              </div>
-
-              {/* Education */}
-              <div className="flex items-start gap-3 p-4 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-colors duration-300">
-                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--color-accent)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-sans text-[var(--color-text-muted)] uppercase tracking-wide mb-0.5">
-                    Education
-                  </p>
-                  <p className="text-sm font-sans font-semibold text-[var(--color-text)]">
-                    {data.education.school}
-                  </p>
-                  <p className="text-xs font-sans text-[var(--color-text-muted)]">
-                    {data.education.degree}
-                  </p>
+                <div className="card p-4 sm:p-5 sm:mt-6 lg:mt-8">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 sm:mb-3 card-flat flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg>
+                  </div>
+                  <p className="text-[9px] sm:text-[10px] text-[var(--color-text-muted)] uppercase mb-1">Education</p>
+                  <p className="text-sm font-semibold">{data.education.school}</p>
+                  <p className="text-xs text-[var(--color-text-muted)] mt-1">{data.education.degree}</p>
                 </div>
               </div>
             </ScrollReveal>
           </div>
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="flex justify-center mt-16">
-        <button
-          onClick={scrollToExperience}
-          aria-label="Scroll to experience section"
-          className="flex flex-col items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200 cursor-pointer bg-transparent border-none"
-        >
-          <span className="text-xs font-sans uppercase tracking-widest">Scroll</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="animate-bounce"
-          >
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
-        </button>
       </div>
     </section>
   );

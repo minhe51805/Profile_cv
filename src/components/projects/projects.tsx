@@ -3,115 +3,76 @@
 import ScrollReveal from "@/components/scroll-reveal";
 
 interface Project {
-  name: string;
-  description: string;
-  tags: string[];
-  githubUrl: string;
-  demoUrl: string;
-  imageUrl: string;
-  stars: number;
-  language: string;
+  name: string; description: string; tags: string[];
+  githubUrl: string; demoUrl: string; imageUrl: string;
+  stars: number; language: string;
 }
+interface PortfolioData { projects: Project[]; [key: string]: unknown; }
 
-interface PortfolioData {
-  projects: Project[];
-  [key: string]: unknown;
-}
+export default function Projects({ data }: { data: PortfolioData }) {
+  const featured = data.projects.slice(0, 2);
+  const regular = data.projects.slice(2);
 
-interface ProjectsProps {
-  data: PortfolioData;
-}
-
-export default function Projects({ data }: ProjectsProps) {
   return (
-    <section
-      id="projects"
-      className="relative py-20 md:py-28 bg-[var(--color-bg)]"
-    >
-      {/* Background Grid */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid opacity-[0.06]" />
-      </div>
+    <section id="projects" className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-[var(--color-bg)]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
-      <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-10">
-        {/* Section Header */}
-        <div className="mb-4">
-          <span className="section-label">Selected Work</span>
-        </div>
-        <h2 className="font-display font-bold text-3xl md:text-5xl text-[var(--color-text)] mb-10 md:mb-16">
-          Recent Projects
-        </h2>
+        <ScrollReveal>
+          <span className="section-label text-[9px] sm:text-[10px]">Selected Work</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[var(--color-text)] mb-8 sm:mb-12 md:mb-16 leading-[0.9]">
+            Recent<span className="block text-[var(--color-warm)]">Projects</span>
+          </h2>
+        </ScrollReveal>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.projects.map((project, index) => (
-            <ScrollReveal key={index} delay={index * 100} className="group">
-              <div className="relative flex flex-col h-full bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl overflow-hidden hover:border-[var(--color-accent)]/40 hover:shadow-xl transition-all duration-300 ease-out">
-                {/* Project Image */}
-                <div className="relative w-full aspect-video overflow-hidden bg-[var(--color-bg-elevated)]">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 ease-out"
-                  />
+        {/* FEATURED - Large horizontal cards */}
+        <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-10">
+          {featured.map((p, i) => (
+            <ScrollReveal key={p.name} delay={i * 100}>
+              <div className="card overflow-hidden group">
+                <div className="grid grid-cols-1 md:grid-cols-12">
+                  <div className={`md:col-span-5 relative aspect-video md:aspect-auto img-frame ${i % 2 === 1 ? 'md:order-2' : ''}`}>
+                    <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                    {p.stars > 0 && <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-[9px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 bg-white/90 rounded-full shadow-sm">★ {p.stars}</div>}
+                  </div>
+                  <div className={`md:col-span-7 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-center ${i % 2 === 1 ? 'md:order-1' : ''}`}>
+                    <h3 className="font-display font-bold text-lg sm:text-xl mb-2 sm:mb-3">{p.name}</h3>
+                    <span className="tag w-fit mb-3 sm:mb-4 text-[10px] sm:text-[11px]">{p.language}</span>
+                    <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed mb-4 sm:mb-5">{p.description}</p>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                      {p.tags.map((t, ti) => <span key={ti} className="tag text-[9px] sm:text-[10px]">{t}</span>)}
+                    </div>
+                    <div className="flex gap-2 sm:gap-3">
+                      <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline text-[10px] sm:text-xs">Code</a>
+                      <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-[10px] sm:text-xs">Demo</a>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
 
-                {/* Card Content */}
-                <div className="flex flex-col flex-1 p-6">
-                  {/* Project Name + Language badge */}
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display font-bold text-lg text-[var(--color-text)]">
-                      {project.name}
-                    </h3>
-                    <span className="text-[10px] font-sans font-medium px-2 py-0.5 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
-                      {project.language}
-                    </span>
+        {/* REGULAR - Masonry-style 3 column */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {regular.map((p, i) => (
+            <ScrollReveal key={p.name} delay={i * 100}>
+              <div className={`card overflow-hidden group h-full flex flex-col ${i === 1 ? 'sm:mt-6 lg:mt-8' : ''}`}>
+                <div className="relative aspect-video img-frame border-b border-[var(--color-border)]">
+                  <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                  {p.stars > 0 && <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-[9px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 bg-white/90 rounded-full shadow-sm">★ {p.stars}</div>}
+                </div>
+                <div className="flex flex-col flex-1 p-4 sm:p-5">
+                  <div className="flex items-start justify-between mb-2 sm:mb-3">
+                    <h3 className="font-display font-bold text-base sm:text-lg">{p.name}</h3>
+                    <span className="tag text-[9px] sm:text-[10px]">{p.language}</span>
                   </div>
-
-                  {/* Description */}
-                  <p className="font-sans text-sm text-[var(--color-text-muted)] leading-relaxed mb-4 flex-1">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Tags as Pills */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="inline-block px-2.5 py-0.5 text-[11px] font-sans font-medium text-[var(--color-accent)] bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <p className="text-[11px] sm:text-xs text-[var(--color-text-muted)] leading-relaxed mb-3 sm:mb-4 flex-1">{p.description}</p>
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
+                    {p.tags.map((t, ti) => <span key={ti} className="tag text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5">{t}</span>)}
                   </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] font-sans font-medium text-xs rounded-lg hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:scale-[1.02] transition-all duration-200 active:scale-95"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                      Code
-                    </a>
-
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[var(--color-accent)] text-[var(--color-bg)] font-sans font-medium text-xs rounded-lg hover:bg-[var(--color-accent-hover)] hover:scale-[1.02] transition-all duration-200 active:scale-95"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                      Demo
-                    </a>
+                  <div className="flex gap-1.5 sm:gap-2">
+                    <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline text-[9px] sm:text-[10px] flex-1 justify-center">Code</a>
+                    <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-[9px] sm:text-[10px] flex-1 justify-center">Demo</a>
                   </div>
                 </div>
               </div>
