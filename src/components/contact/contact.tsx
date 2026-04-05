@@ -28,13 +28,13 @@ export default function Contact({ data }: { data: PortfolioData }) {
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              {/* Email */}
-              <div onClick={handleCopy}
-                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 bg-[var(--color-cream)] border border-[var(--color-border)] rounded-xl cursor-pointer hover:border-[var(--color-accent)] transition-all group mb-4 sm:mb-6 max-w-full">
+              {/* Email - Clickable mailto link */}
+              <a href={`mailto:${data.email}`}
+                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 bg-[var(--color-cream)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-accent)] transition-all group mb-4 sm:mb-6 max-w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" strokeWidth="2" className="group-hover:stroke-[var(--color-text)] transition-colors flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-                <span className="font-semibold text-sm sm:text-base truncate">{copied ? "Copied!" : data.email}</span>
-              </div>
-              <p className="text-xs text-[var(--color-text-muted)] mb-6 sm:mb-8">{copied ? "✓ Copied to clipboard" : "Click to copy email"}</p>
+                <span className="font-semibold text-sm sm:text-base truncate">{data.email}</span>
+              </a>
+              <p className="text-xs text-[var(--color-text-muted)] mb-6 sm:mb-8">Click to send email</p>
             </ScrollReveal>
 
             <ScrollReveal delay={300}>
