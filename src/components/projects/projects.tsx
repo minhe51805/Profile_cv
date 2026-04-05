@@ -95,10 +95,16 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 // Card Component
 function Card({ project, index, onOpenModal }: { project: Project; index: number; onOpenModal: () => void }) {
   const [flipped, setFlipped] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), index * 120 + 300);
+    return () => clearTimeout(timer);
+  }, [index]);
 
   return (
     <div
-      className="perspective-1000 group cursor-pointer w-full"
+      className={`perspective-1000 group cursor-pointer w-full transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-32 scale-50 rotate-12'}`}
       style={{ perspective: "1000px" }}
       onClick={() => {
         if (flipped) {
@@ -181,15 +187,14 @@ export default function Projects({ data }: { data: PortfolioData }) {
         
         {/* Section Header - Always Visible */}
         <ScrollReveal>
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-4 mb-3">
+          <div className="mb-8">
+            <div className="flex items-center gap-4 mb-3">
               <div className="w-6 sm:w-8 h-[1px] bg-[var(--color-text-muted)]" />
               <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">Selected Work</span>
-              <div className="w-6 sm:w-8 h-[1px] bg-[var(--color-text-muted)]" />
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[var(--color-text)] mb-4 sm:mb-6 leading-[0.9]">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[var(--color-text)] leading-[0.9]">
               Recent
-              <span className="block text-[var(--color-warm)]">Projects</span>
+              <span className="text-[var(--color-warm)]">Projects</span>
             </h2>
           </div>
         </ScrollReveal>
