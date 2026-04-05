@@ -209,16 +209,25 @@ export default function Projects({ data }: { data: PortfolioData }) {
             {/* Massive Glow Effect Behind Pack */}
             <div className="absolute -inset-20 bg-[var(--color-warm)]/20 blur-[100px] rounded-full group-hover:bg-[var(--color-warm)]/40 transition-all duration-500 animate-pulse" />
             
-            {/* Particles */}
-            <div className="absolute -inset-32 pointer-events-none">
-              {Array.from({ length: 12 }).map((_, i) => (
+            {/* Particles - Fixed positions to avoid hydration mismatch */}
+            <div className="absolute -inset-32 pointer-events-none overflow-hidden">
+              {[
+                { left: "10%", top: "20%" },
+                { left: "85%", top: "15%" },
+                { left: "90%", top: "75%" },
+                { left: "15%", top: "80%" },
+                { left: "50%", top: "10%" },
+                { left: "50%", top: "85%" },
+                { left: "20%", top: "50%" },
+                { left: "80%", top: "50%" },
+              ].map((pos, i) => (
                 <div
                   key={i}
-                  className="absolute w-1 h-1 bg-[var(--color-warm)] rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-300"
+                  className="absolute w-1.5 h-1.5 bg-[var(--color-warm)] rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-300"
                   style={{
-                    left: `${50 + Math.cos(i * 30 * Math.PI / 180) * 40}%`,
-                    top: `${50 + Math.sin(i * 30 * Math.PI / 180) * 40}%`,
-                    animation: `ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite ${i * 0.1}s`
+                    left: pos.left,
+                    top: pos.top,
+                    animation: `ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite ${i * 0.2}s`
                   }}
                 />
               ))}
@@ -261,17 +270,12 @@ export default function Projects({ data }: { data: PortfolioData }) {
           {/* Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-6 py-12">
             {data.projects.map((project, i) => (
-              <div 
+              <Card
                 key={project.name}
-                className={`transition-all duration-700 ease-out transform ${isOpened ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-32 scale-50 rotate-12'}`}
-                style={{ transitionDelay: `${i * 120 + 300}ms` }}
-              >
-                <Card 
-                  project={project} 
-                  index={i} 
-                  onOpenModal={() => setSelectedProject(project)} 
-                />
-              </div>
+                project={project}
+                index={i}
+                onOpenModal={() => setSelectedProject(project)}
+              />
             ))}
           </div>
           
