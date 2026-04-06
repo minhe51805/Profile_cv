@@ -1,6 +1,7 @@
 import Hero from "@/components/hero/hero";
 import About from "@/components/about/about";
 import Experience from "@/components/experience/experience";
+import Skills from "@/components/skills/skills";
 import Projects from "@/components/projects/projects";
 import Contact from "@/components/contact/contact";
 import Footer from "@/components/footer/footer";
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero data={portfolioData} />
       <About data={portfolioData} />
       <Experience data={portfolioData} />
+      <Skills data={portfolioData} />
       <Projects data={portfolioData} />
       <Contact data={portfolioData} />
       <Footer />

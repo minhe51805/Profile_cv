@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/scroll-reveal";
 interface PortfolioData {
   name: string; displayName: string; title: string; bio: string;
   email: string; github: string; facebook: string; cvUrl: string;
-  location: string; profileImage: string; experience: string;
+  location: string; profileImage: string;
   githubStats: { repos: number; followers: number; following: number; stars: number };
   skills: { frontend: { name: string; level: string }[]; backend: { name: string; level: string }[] };
   projects: { name: string }[]; [key: string]: unknown;

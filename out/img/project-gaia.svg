@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="ga-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020c04"/>
+      <stop offset="100%" style="stop-color:#071a0c"/>
+    </linearGradient>
+    <linearGradient id="ga-green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.9"/>
+    </linearGradient>
+    <radialGradient id="ga-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#ga-bg)"/>
+  <!-- Hex grid -->
+  <g fill="none" stroke="#22c55e" stroke-opacity="0.05" stroke-width="1">
+    <polygon points="100,50 125,30 175,30 200,50 175,70 125,70"/>
+    <polygon points="200,50 225,30 275,30 300,50 275,70 225,70"/>
+    <polygon points="300,50 325,30 375,30 400,50 375,70 325,70"/>
+    <polygon points="400,50 425,30 475,30 500,50 475,70 425,70"/>
+    <polygon points="500,50 525,30 575,30 600,50 575,70 525,70"/>
+    <polygon points="600,50 625,30 675,30 700,50 675,70 625,70"/>
+    <polygon points="150,100 175,80 225,80 250,100 225,120 175,120"/>
+    <polygon points="350,100 375,80 425,80 450,100 425,120 375,120"/>
+    <polygon points="550,100 575,80 625,80 650,100 625,120 575,120"/>
+    <polygon points="100,130 125,110 175,110 200,130 175,150 125,150"/>
+    <polygon points="250,130 275,110 325,110 350,130 325,150 275,150"/>
+    <polygon points="450,130 475,110 525,110 550,130 525,150 475,150"/>
+    <polygon points="600,130 625,110 675,110 700,130 675,150 625,150"/>
+    <polygon points="200,160 225,140 275,140 300,160 275,180 225,180"/>
+    <polygon points="500,160 525,140 575,140 600,160 575,180 525,180"/>
+    <polygon points="150,190 175,170 225,170 250,190 225,210 175,210"/>
+    <polygon points="350,190 375,170 425,170 450,190 425,210 375,210"/>
+    <polygon points="550,190 575,170 625,170 650,190 625,210 575,210"/>
+  </g>
+  <ellipse cx="400" cy="220" rx="260" ry="160" fill="url(#ga-glow)"/>
+  <!-- Blockchain chain links -->
+  <g transform="translate(400,200)">
+    <!-- Central hexagon (data block) -->
+    <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="none" stroke="url(#ga-green)" stroke-width="2"/>
+    <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="#22c55e" fill-opacity="0.1" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
+    <!-- Left chain -->
+    <line x1="-52" y1="-15" x2="-90" y2="-15" stroke="#22c55e" stroke-width="2" stroke-opacity="0.6"/>
+    <rect x="-110" y="-30" width="20" height="30" rx="3" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.5"/>
+    <!-- Right chain -->
+    <line x1="52" y1="-15" x2="90" y2="-15" stroke="#22c55e" stroke-width="2" stroke-opacity="0.6"/>
+    <rect x="90" y="-30" width="20" height="30" rx="3" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.5"/>
+    <!-- Data flow dots -->
+    <circle cx="-71" cy="-15" r="3" fill="#22c55e" fill-opacity="0.7"/>
+    <circle cx="71" cy="-15" r="3" fill="#22c55e" fill-opacity="0.7"/>
+    <!-- AI brain pattern inside hexagon -->
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#22c55e" stroke-width="1" stroke-opacity="0.4"/>
+    <circle cx="0" cy="0" r="5" fill="#22c55e" fill-opacity="0.3"/>
+    <g stroke="#22c55e" stroke-width="0.8" stroke-opacity="0.3">
+      <line x1="0" y1="-15" x2="0" y2="-5"/>
+      <line x1="0" y1="5" x2="0" y2="15"/>
+      <line x1="-15" y1="0" x2="-5" y2="0"/>
+      <line x1="5" y1="0" x2="15" y2="0"/>
+    </g>
+  </g>
+  <!-- IoT sensor nodes -->
+  <g fill="none" stroke="#22c55e" stroke-width="1.5">
+    <!-- Sensor 1 - top left -->
+    <circle cx="160" cy="300" r="12"/>
+    <line x1="160" y1="312" x2="160" y2="340" stroke-opacity="0.3"/>
+    <circle cx="160" cy="340" r="3" fill="#22c55e" fill-opacity="0.5"/>
+    <!-- Sensor 2 - top right -->
+    <circle cx="640" cy="300" r="12"/>
+    <line x1="640" y1="312" x2="640" y2="340" stroke-opacity="0.3"/>
+    <circle cx="640" cy="340" r="3" fill="#22c55e" fill-opacity="0.5"/>
+    <!-- Sensor 3 - bottom -->
+    <circle cx="400" cy="340" r="12"/>
+    <line x1="400" y1="352" x2="400" y2="380" stroke-opacity="0.3"/>
+    <circle cx="400" cy="380" r="3" fill="#22c55e" fill-opacity="0.5"/>
+  </g>
+  <!-- Connecting lines to center -->
+  <g stroke="#22c55e" stroke-width="1" stroke-opacity="0.08" fill="none">
+    <line x1="160" y1="300" x2="348" y2="260"/>
+    <line x1="640" y1="300" x2="452" y2="260"/>
+    <line x1="400" y1="340" x2="400" y2="280"/>
+  </g>
+  <text x="400" y="430" font-family="system-ui, sans-serif" font-size="13" fill="#22c55e" fill-opacity="0.6" text-anchor="middle" font-weight="500">IoT · AI · BLOCKCHAIN</text>
+</svg>

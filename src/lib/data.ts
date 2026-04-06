@@ -13,7 +13,48 @@ export const portfolioData = {
     school: "Hutech University",
     degree: "Information Technology",
   },
-  experience: "Frontend Developer",
+  currentFocus: "Frontend Development",
+  workExperience: [
+    {
+      role: "Frontend Developer",
+      company: "Personal and Academic Projects",
+      period: "2024 - Present",
+      type: "Project-Based Experience",
+      description:
+        "Building practical frontend experience through self-initiated products, university work, and shipping polished interfaces from idea to demo.",
+      bullets: [
+        "Built responsive interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
+        "Integrated APIs, managed client-side state, and turned product ideas into usable flows.",
+        "Focused on clean UI structure, reusable components, and real deployment-ready implementation.",
+      ],
+    },
+    {
+      role: "Hackathon Team Member",
+      company: "LotusHack and Collaborative Builds",
+      period: "2025 - Present",
+      type: "Team Collaboration",
+      description:
+        "Working in fast-paced team environments where priorities change quickly and shipping a convincing prototype matters.",
+      bullets: [
+        "Collaborated with teammates to scope features, split responsibilities, and deliver demos on deadline.",
+        "Built user-facing pages for AI-driven and data-rich products under hackathon time pressure.",
+        "Practiced presenting ideas, iterating from feedback, and balancing speed with product clarity.",
+      ],
+    },
+    {
+      role: "Open Source and Self-Learning Builder",
+      company: "GitHub Portfolio",
+      period: "2023 - Present",
+      type: "Independent Growth",
+      description:
+        "Using open repositories and side projects as a way to deepen engineering habits while preparing for a first formal role.",
+      bullets: [
+        "Published projects, documented features, and maintained a public portfolio of ongoing work.",
+        "Explored beyond frontend with FastAPI, PostgreSQL, Rust, Tauri, and deployment workflows.",
+        "Strengthened debugging, Git usage, code organization, and cross-stack problem solving through hands-on practice.",
+      ],
+    },
+  ],
   githubStats: {
     repos: 24,
     followers: 7,

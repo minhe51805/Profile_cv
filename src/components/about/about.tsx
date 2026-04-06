@@ -4,7 +4,7 @@ import Image from "next/image";
 import ScrollReveal from "@/components/scroll-reveal";
 
 interface PortfolioData {
-  bio: string; location: string; experience: string;
+  bio: string; location: string; currentFocus: string;
   education: { school: string; degree: string };
   aboutImage: string;
   githubStats: { repos: number; followers: number; following: number; stars: number };
@@ -78,8 +78,8 @@ export default function About({ data }: { data: PortfolioData }) {
                   <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 sm:mb-3 card-flat flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" strokeWidth="2"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
                   </div>
-                  <p className="text-[9px] sm:text-[10px] text-[var(--color-text-muted)] uppercase mb-1">Experience</p>
-                  <p className="text-sm font-semibold">{data.experience}</p>
+                  <p className="text-[9px] sm:text-[10px] text-[var(--color-text-muted)] uppercase mb-1">Current Focus</p>
+                  <p className="text-sm font-semibold">{data.currentFocus}</p>
                 </div>
                 <div className="card p-4 sm:p-5 sm:mt-6 lg:mt-8">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 sm:mb-3 card-flat flex items-center justify-center">
